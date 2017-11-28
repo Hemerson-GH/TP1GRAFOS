@@ -2,9 +2,10 @@
 
 using namespace std;
 
-int main() 
+int main()
 {
   cout << "Teste Inicial" << endl;
+  cout << "Consegui Dar Pull No Repositório" << endl;
 
   return 0;
 }
