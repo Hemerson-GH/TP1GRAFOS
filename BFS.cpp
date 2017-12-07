@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <vector>
-#include <algorithm>
-#include <vector>
-#include <queue>
 #include <iostream>
+//~ #include <stdio.h>
+#include <vector>
+//~ #include <algorithm>
+#include <queue>
 
 using namespace std;
 
@@ -46,7 +45,7 @@ int encontraCaminho(int partida, int destino, int totalnode, int totaledge)
         if(ultimoNohDoCaminho == destino)
         {
             cout << "O Caminho Necessário é :: ";
-            imprimiCaminho(caminho);
+            imprimiCaminho(caminho);  
         }
         else
         {
@@ -70,17 +69,17 @@ int main()
     //freopen("out.txt","w",stdout);
 
     int T, N, M, u, v, partida, destino;
-    
+
     cout << "Insira a quantidade de grafos para o teste" << endl;
-    
+
     cin >> T;
 
     while(T--)
     {
         cout << ("Insira O Total De Vertices & Total De Arestas\n");
-        
+
         cin >> N >> M;
-        
+
         for(int i = 1; i <= M; i++)
         {
             cin >> u >> v;
@@ -90,7 +89,7 @@ int main()
         cout << "Insira O Vertice De Partida E Destino" << endl;
 
         cin >> partida >> destino;
-        
+
         encontraCaminho(partida, destino, N, M);
     }
 
