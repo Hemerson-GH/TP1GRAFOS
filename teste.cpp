@@ -4,12 +4,9 @@ using namespace std;
 
 int main () 
 {
-	int n = 10;
-	
-	while (--n)
+	for (int i = 0; i < 10; i++, i++)
 	{
-		cout << n << endl;
+		cout << i << "\t" << i+1 << endl;
 	}
 	
-		
 }
