@@ -32,47 +32,58 @@ void addVertice(vector <int> vertices, int v)
 	
 }
 
-int main(int argc, char* argv[])
+//~ int main(int argc, char* argv[])
+int main()
 {
-	if (argc != 2)
-	{
-		cerr << "Uso: " << endl;
-		cerr << argv[0] << " arquivoEntrada" << endl;
-		exit(EXIT_FAILURE);
-	}
+	//~ if (argc != 2)
+	//~ {
+		//~ cerr << "Uso: " << endl;
+		//~ cerr << argv[0] << " arquivoEntrada" << endl;
+		//~ exit(EXIT_FAILURE);
+	//~ }
 	
-	ifstream arq(argv[1]);
+	//~ ifstream arq(argv[1]);
+	ifstream arq("exe2.txt");
 	
-	int cases;
+	string cases;
 	
 	string ele;
 	
-	string texto;
+	string texto = "";
 	
-	int vertexInit[2];
+	string vertexInit[2];
 	
 	vector <int> vertex;
 
 	if (arq.good()) {
 
-		arq >> cases;
+		//~ arq >> cases;
+		getline(arq, cases);
 		
-		arq >> vertexInit[0];
-		arq >> vertexInit[1];
+		//~ arq >> vertexInit[0];
+		getline(arq, vertexInit[0]);
+		getline(arq, vertexInit[1]);
+		//~ arq >> vertexInit[1];
 		
 		
-		do
+		while (arq.good())
 		{
-			arq >> ele;
+			//~ arq >> texto;
+			getline(arq, texto);
 			
-			texto += ele;
-			if (true)
+			if (texto != " ")
 			{
-				cout << ele << ' ';
-				//vertex.push_back(ele);
+				cout << texto << endl;
 			}
 			
-		} while (arq);
+			//~ texto += ele;
+			//~ if (true)
+			//~ {
+				//~ cout << ele << ' ';
+				//~ //vertex.push_back(ele);
+			//~ }
+			
+		}
 
 	} else {
 		cout << "Arquivo corrompido" << endl;
@@ -85,10 +96,10 @@ int main(int argc, char* argv[])
 	//~ {
 		//~ cout << vertex[i] << ' ';	
 	//~ }	
-	for (int i = 0; i < (int) texto.size(); i++)
-	{
-		cout << texto[i] << ' ';	
-	}	
+	//~ for (int i = 0; i < (int) texto.size(); i++)
+	//~ {
+		//~ cout << texto[i] << ' ';	
+	//~ }	
 
   return 0;
 }
