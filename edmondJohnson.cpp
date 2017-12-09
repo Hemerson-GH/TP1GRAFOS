@@ -12,19 +12,20 @@
 #include <vector>
 #include <stack>
 
-
 using namespace std;
+typedef int mat[20][20];
 
-void DFS(int G[][] ,stack &S, int x, int t, int E) {   
+
+void DFS(mat &G ,stack<int> S, int x, int t, int V, int E) {   
     int k = 0, m, a;
     S.push(x);
-    for( int i = t; i < v ; i++ ) { 
+    for( int i = t; i < V ; i++ ) { 
         if( G[i][x] > 0 )   
         {   
             k = 1;
             G[i][x] = 0;
             G[x][i] = 0;
-            DFS(G, S, i, 0);   
+            DFS(G, S, i, 0, V, E);   
             break; 
         }
     }
@@ -39,7 +40,7 @@ void DFS(int G[][] ,stack &S, int x, int t, int E) {
         if(S.size() != E)   
         {   
             S.pop();
-            DFS(G, S, m, a);   
+            DFS(G, S, m, a, V, E);   
         }   
         else   
             S.push(x);
@@ -50,12 +51,12 @@ void DFS(int G[][] ,stack &S, int x, int t, int E) {
 // x vertice inicial 
 // E numero de arestas
 // uma variavel qualquer 
-void Fleury(int G[][], int x, int E) {
-    int k = 0, m;
+void Fleury(mat &G, int x, int V, int E) {
+    int m;
     stack<int> S;
     // uma busca em profundidade para encontrar o caminho euleriano  
     // eu empilho os vertices na busca e desempilho para mostrar o caminho  
-    DFS(G, S, x, 0, E);
+    DFS(G, S, x, 0, V , E);
     while( S.size() != 0 ) {
         m = S.top();
         // fazer uma alteração aqui:
@@ -73,31 +74,34 @@ int euclideanD(int x1, int x2, int y1, int y2) {
 
 // Cheking if the Graph is on Euler properties
 // check if every vertice have pair degree
-bool checkEuler(int mat[][], int nVertix) {
+bool checkEuler(mat &G, int nVertix) {
 	int cont = 0;
+	bool euleriano = true;
 	for (int i = 0; i < nVertix; ++i)
 	{
 		for (int j = 0; j < nVertix; ++j)
 		{
-			if (mat[i][j] > 0)
+			if (G[i][j] > 0)
 			{
 				cont++;
 			}
 		}
 		if(cont == 0 || cont % 2 != 0)
 		{
-			return false;
+			euleriano = false;
 		}
 	}
+	return euleriano;
+	
 }
 
 // para encontrar o caminho minimo
-void FloydWarshall(int mat[][], int v) {
+void FloydWarshall(mat &G, int v) {
 	for(int k = 0; k < v; k++) {
 		for(int i = 0; i < v; i++) {
 			for(int j = 0; j < v; j++) {
-				if( mat[i][k] + mat[k][j] < mat[i][j] ){
-					mat[i][j] = mat[i][k] + mat[k][j];
+				if( G[i][k] + G[k][j] < G[i][j] ){
+					G[i][j] = G[i][k] + G[k][j];
 				}
 			}
 		}
@@ -105,20 +109,20 @@ void FloydWarshall(int mat[][], int v) {
 }
 
 // Here we apply the algorithm to Eulerize a Graph G generic
-void EdmondsJohnson(int mat[][], int v) {
+void EdmondsJohnson(mat &G, int v) {
 
 	// here is where things get confused
 	// Eulerize the graph:
 	// 1 - Seja I o conjunto de todos os de grau impar
 	// no caso Q
 
-	int cout = 0;
-	vector<int> vector Q;
+	int cont = 0;
+	vector<int> Q;
 	for (int i = 0; i < v; ++i)
 	{
 		for (int j = 0; j < v; ++j)
 		{
-			if ( mat[i][j] > 0 )
+			if ( G[i][j] > 0 )
 			{
 				cont++;
 			}
@@ -140,7 +144,7 @@ void EdmondsJohnson(int mat[][], int v) {
 	// preciso ver a distancia do caminho minimo para cada vertices
 	// i e j que pertecem a fila
 	int matchings[Q.size()-1][Q.size()];
-	stack<int> stack S;
+	stack<int> S;
 	for(int i = 0; i < Q.size()-1; i++) {
 		for(int j = 0; j < 2; j++) {
 			
@@ -155,14 +159,14 @@ void EdmondsJohnson(int mat[][], int v) {
 
 
 // Here we apply the algorithm to Eulerize a Graph G generic
-void process(int mat[][], int v) {
+void process(mat &G, int x, int v, int e) {
 	if (checkEuler){
-		Fleury(mat, v);
+		Fleury(G, x, v, e);
 	} else {
 		// here is where we get confused
 		// Eulerize the graph
-		EdmondsJohnson(mat, v);
-		Fleury(mat, v);
+		EdmondsJohnson(G, v);
+		Fleury(G, x, v, e);
 	}
 }
 
