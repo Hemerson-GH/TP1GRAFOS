@@ -8,7 +8,7 @@
 #include <fstream>
 #include <cmath>
 #include <queue>
-#include <stack>
+#include <vector>
 
 #define MAX 20
 
@@ -66,15 +66,26 @@ bool graph :: checkEuler(station matrix, int nVertix) {
 		}
 	}
 }
-
+// para encontrar o caminho minimo
+void FloydWarshall(int mat[][], int v) {
+	for(int k = 0; k < v; k++) {
+		for(int i = 0; i < v; i++) `{
+			for(int j = 0; j < v; j++) {
+				if( mat[i][k] + mat[k][j] < mat[i][j] ){
+					dist[i][j] = dist[i][k] + dist[k][j];
+				}
+			}
+		}
+	}
+}
 // Here we apply the algorithm to Eulerize a Graph G generic
-void graph :: EdmondsJohnson(station mat[][], int v) {
+void graph :: EdmondsJohnson(int mat[][], int v) {
 	// here is where things get confused
 	// Eulerize the graph:
-	// 1 - Seja I o conjunto de todos os nós de grau ímpar
+	// 1 - Seja I o conjunto de todos os nao de grau impar
+	
 	int cout = 0;
-	queue<int> queue Q;
-
+	vector<int> vector Q;
 	for (int i = 0; i < v; ++i)
 	{
 		for (int j = 0; j < v; ++j)
@@ -83,47 +94,31 @@ void graph :: EdmondsJohnson(station mat[][], int v) {
 			{
 				cont++;
 			}
-			if ( j == v-1 and (cont % 2) != 0 )
+			if ( (j == v-1) and (cont % 2) != 0 )
 			{
-				Q.push(i);
+				Q.push_back(i);
 				cont = 0;
-			}
+			} else cont = 0;
 		}
 	}
-	// Agora eu tenho uma fila ou um vetor ou uma pilha
+	// Agora eu tenho uma fila 
 	// com todos os vertices de grau impar
 	// preciso ver a distancia do caminho minimo para cada vertices
 	// i e j que pertecem a fila
 	// vou fazer uma matriz com matchings
-	int matching[Q.size()-1][Q.size()];
-	int var;
+	
+	int menor = 0, aux = 0;
+	int matchings[Q.size()-1][Q.size()]
 	stack<int> stack S;
-
-	for (int i = 1; i < Q.size(); ++i)
-	{
-		for (int j = 1; j < Q.size(); ++j)
-		{
-			if (j == 2)
-			{
-				S.push(Q.front);
-				Q.pop();
-			}
-
-			var = Q.front();
-			if( Q.front() > S.top() ) {
-				var = S.top();
-				S.pop();
-			}
-			else var = Q.front();
-
-			aux[i][j] = var;
-			Q.pop();
-			Q.push(var);
+	for(int i = 0; i < Q.size()-1; i++) {
+		for(int j = 0; j < 2; j++) {
+			
 		}
 	}
 	// Agora eu tenho os matchings, preciso ver o matching mais
 	// "barato" - caminho minimo
-
+	// mais facil pego a matriz resultante do algoritmo de warshall
+	// e 
 
 }
 
