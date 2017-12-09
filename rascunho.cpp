@@ -45,8 +45,8 @@ class graph {
 };
 
 
-int graph :: euclideanD(int x, int x1, int y, int y1){
-	return sqrt( pow(x1-x,2) + pow(y1-y,2) );
+int graph :: euclideanD(int x1, int x2, int y1, int y2){
+	return sqrt( pow(x2-x1, 2) + pow(y2-y1, 2) );
 }
 
 // Cheking if the Graph is on Euler properties
