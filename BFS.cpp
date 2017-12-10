@@ -18,18 +18,16 @@ inline void imprimiCaminho(vector <int> caminho)
     cout << "]" << endl;
 }
 
-bool nohVizinhoNaoEstaPresenteNoCaminho(int node, vector <int> caminho)
-{
-    for(int i = 0; i < (int)caminho.size(); i++)
-    {
-        if(caminho[i] == node)
-          return false;
+bool nohVizinhoNaoEstaPresenteNoCaminho(int node, vector <int> caminho) {
+    for(int i = 0; i < (int)caminho.size(); i++) {
+        if(caminho[i] == node){
+			return false;
+		}
     }
     return true;
 }
 
-int encontraCaminho(int partida, int destino, int totalnode, int totaledge)
-{
+void encontraCaminho(int partida, int destino, int totalnode, int totaledge) {
     vector <int> caminho;
     caminho.push_back(partida);
     queue < vector <int>> q;
@@ -62,7 +60,7 @@ int encontraCaminho(int partida, int destino, int totalnode, int totaledge)
             }
         }
     }
-    return 1;
+    //~ return 1;
 }
 int main()
 {
