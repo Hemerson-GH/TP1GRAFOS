@@ -98,6 +98,21 @@ int main()
 		GRAPH[5].push_back( Aresta(3, 5) );
 		
         encontraCaminho(1, 5);
+        
+        for (int i = 0; i < (int)caminhosPossiveis.size(); i++)
+		{
+			cout << "Caso #" << caminhosPossiveis[i].caso << endl;
+			cout << "Mínimo de viagens = " << ceil((double)numeroDePassageiros/(caminhosPossiveis[i].menorPeso-1)) << endl;
+			cout << "Rota: ";
+			
+			for (int j = 0; j < (int)caminhosPossiveis[i].caminho.size(); j++)
+			{
+				cout << caminhosPossiveis[i].caminho[j];
+				if(j < (int)caminhosPossiveis[i].caminho.size()-1 ) { cout <<  " - "; }
+			}
+			cout << endl;
+		}
+        
     }
 
     return 0;
